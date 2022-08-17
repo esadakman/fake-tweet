@@ -8,6 +8,11 @@ import {
   VerifiedIcon,
 } from "./icons";
 
+// const tweetFormat = tweet => {
+//   tweet = tweet.replace(/@([\w]+), 'a' );
+//   return tweet;
+// }
+
 function App() {
   const [name, setName] = useState();
   const [userName, setUserName] = useState();
@@ -22,6 +27,36 @@ function App() {
     <>
       <div className="tweet-settings">
         <h3>Tweet Ayarları</h3>
+        <ul>
+          <li>
+            <input
+              className="input"
+              type="text"
+              placeholder="Name Surname"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </li>
+          <li>
+            <input
+              className="input"
+              type="text"
+              placeholder="Username"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </li>
+          <li>
+            <textarea
+              className="textarea"
+              type="text"
+              maxLength="290"
+              placeholder="Tweet"
+              value={tweet}
+              onChange={(e) => setTweet(e.target.value)}
+            />
+          </li>
+        </ul>
       </div>
       <div className="tweet-container">
         <div className="tweet">
