@@ -1,4 +1,5 @@
 import "./App.scss";
+import { LikeIcon, ReplyIcon, RetweetIcon, ShareIcon } from "./icons";
 
 function App() {
   return (
@@ -28,11 +29,18 @@ function App() {
         </span>
       </div>
       <div className="tweet-actions">
-        <span>icon</span>
-        <span>icon</span>
-        <span>icon</span>
-        <span>icon</span>
-        <span>icon</span>
+        <span>
+          <ReplyIcon />
+        </span>
+        <span>
+          <RetweetIcon />
+        </span>
+        <span>
+          <LikeIcon />
+        </span>
+        <span>
+          <ShareIcon />
+        </span>
       </div>
     </div>
   );
