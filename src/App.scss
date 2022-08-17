@@ -7,11 +7,39 @@
     Arial, sans-serif;
 }
 
+html,
 body {
   background-color: #000;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.tweet-container {
+  padding: 0 50px;
+}
+
+.tweet-settings {
+  flex: 1;
+  color: white;
+  border-right: 1px solid #ddd;
+  height: 100%;
+  padding: 25px;
+  h3 {
+    font-size: 24px;
+    font-weight: normal;
+    border-bottom: 1px solid #2f3336;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
 }
 
 .tweet {
+  // background-color: red;
   border: 1px solid #2f3336;
   width: 600px;
   margin: 25px auto;
@@ -32,6 +60,12 @@ body {
     .name {
       color: white;
       font-weight: 700;
+      display: flex;
+      align-items: center;
+      height: 19px;
+      svg {
+        margin-left: 3px;
+      }
     }
     .username {
       color: #6e767d;
