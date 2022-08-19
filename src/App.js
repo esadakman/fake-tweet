@@ -32,7 +32,7 @@ const tweetFormat = (tweet) => {
   tweet = tweet
     .replace(/@([\w]+)/g, "<span>@$1</span>")
     .replace(/#([\wşçöğüıİ]+)/gi, "<span>#$1</span>")
-    .replace(/(https?:\/\/[\w\.\/]+)/, "<span>$1</span>");
+    .replace(/(https?:\/\/[\w./]+)/, "<span>$1</span>");
   return tweet;
 };
 
@@ -71,6 +71,7 @@ function App() {
     if (image) {
       downloadRef.current.click();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [image]);
 
   const avatarHandle = (e) => {
@@ -89,7 +90,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         const twitter = data[0];
-        console.log(twitter);
+        console.log(twitter.verified === true);
 
         convertImgToBase64(
           twitter.profile_image_url_https,
@@ -102,6 +103,8 @@ function App() {
         setTweet(twitter.status.text);
         setRetweets(twitter.status.retweet_count);
         setLikes(twitter.status.favorite_count);
+
+        twitter.verified === true ? setIsVerified(1) : setIsVerified(0);
       });
   };
   // console.log(name);
@@ -121,7 +124,7 @@ function App() {
             />
           </li>
           <li>
-            <label>{langText?.username}</label>
+            <label>{userName || langText?.username}</label>
             <input
               className="input"
               type="text"
@@ -219,7 +222,7 @@ function App() {
             onChange={(e) => setUserName(e.target.value)}
             // style={{}}
           />
-          <button onClick={fetchTwitterInfo}>Bilgileri Çek</button>
+          <button onClick={fetchTwitterInfo}>{langText?.button}</button>
         </div>
 
         <div className="tweet" ref={tweetRef}>
@@ -227,12 +230,12 @@ function App() {
             {(avatar && <img src={avatar} alt="avatar" />) || <AvatarLoader />}
             <div>
               <div className="name">
-                <span>{langText?.name || "Ad Soyad"}</span>
-                {}
-                {isVerified === 1 && <VerifiedIcon width="19" height="19" />}
+                <span>{name || langText?.name || "Ad Soyad"}</span>
+
+                {isVerified == 1 && <VerifiedIcon width="19" height="19" />}
               </div>
               <div className="username">
-                @{langText?.username || "username"}
+                @{userName || langText?.username || "username"}
               </div>
             </div>
           </div>

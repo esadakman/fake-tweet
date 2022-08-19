@@ -8,11 +8,12 @@ const tr = {
   isVerified: "Doğrulanmış Hesap",
   userSearch: "Twitter kullanıcı adını yazın",
   verifiedConfirm: ["Evet", "Hayır"],
+  button: "Bilgileri Çek",
 };
 
 const en = {
   settings: "Tweet Settings",
-  name: "Name and Surname",
+  name: "Name Surname",
   username: "Username",
   quote: " Quote Tweets",
   like: "Likes",
@@ -20,6 +21,7 @@ const en = {
   isVerified: "Verified Account",
   userSearch: "Twitter User Name",
   verifiedConfirm: ["Yes", "No"],
+  button: "Fetch data",
 };
 
 const language = {
