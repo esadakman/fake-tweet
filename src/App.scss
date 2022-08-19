@@ -24,6 +24,30 @@ body {
 
 .tweet-container {
   padding: 0 50px;
+  .fetch-info {
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    input {
+      flex: 1;
+      background: #2f3336;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 3px 0 0 3px;
+      color: #fff;
+      padding: 0 15px;
+      font-size: 15px;
+    }
+    button {
+      height: 40px;
+      padding: 0 20px;
+      font-size: 15px;
+      background: #1da1f2;
+      color: #fff;
+      border-radius: 0 3px 3px 0;
+      cursor: pointer;
+    }
+  }
 }
 
 .tweet-settings {
@@ -100,6 +124,9 @@ body {
       border-color: #4e555a;
     }
   }
+  .download-url {
+    display: none;
+  }
 }
 
 .tweet {
@@ -108,6 +135,7 @@ body {
   width: 600px;
   margin: 25px auto;
   padding: 0 1rem;
+  background: #000;
   &-author {
     height: 48px;
     margin-top: 12px;
