@@ -50,7 +50,7 @@ const formatNumber = (number) => {
 function App() {
   const tweetRef = createRef(null);
   const downloadRef = createRef();
-  const [name, setName] = useState();
+  const [name, setName] = useState("");
   const [userName, setUserName] = useState();
   const [isVerified, setIsVerified] = useState(0);
   const [tweet, setTweet] = useState();
@@ -81,7 +81,7 @@ function App() {
     });
     reader.readAsDataURL(file);
   };
-
+  // console.log(langText?.verifiedConfirm[1]);
   const fetchTwitterInfo = () => {
     fetch(
       `https://typeahead-js-twitter-api-proxy.herokuapp.com/demo/search?q=${userName}`
@@ -104,7 +104,7 @@ function App() {
         setLikes(twitter.status.favorite_count);
       });
   };
-
+  // console.log(name);
   return (
     <>
       <div className="tweet-settings">
@@ -156,7 +156,7 @@ function App() {
             />
           </li>
           <li>
-            <label>Quote Tweets</label>
+            <label>{langText?.quote}</label>
             <input
               className="input"
               type="number"
@@ -166,7 +166,7 @@ function App() {
             />
           </li>
           <li>
-            <label>Likes</label>
+            <label>{langText?.like}</label>
             <input
               className="input"
               type="number"
@@ -176,13 +176,13 @@ function App() {
             />
           </li>
           <li>
-            <label>Doğrulanmış Hesap</label>
+            <label>{langText?.isVerified}</label>
             <select
               onChange={(e) => setIsVerified(e.target.value)}
               defaultValue={isVerified}
             >
-              <option value="1">Evet</option>
-              <option value="0">Hayır</option>
+              <option value="1">{langText?.verifiedConfirm[0]}</option>
+              <option value="0">{langText?.verifiedConfirm[1]}</option>
             </select>
           </li>
           <button onClick={getImage}>Oluştur</button>
@@ -212,10 +212,12 @@ function App() {
         </div>
         <div className="fetch-info">
           <input
+            className="search"
             type="text"
             value={userName || ""}
-            placeholder="Twitter kullanıcı adını yazın"
+            placeholder={langText?.userSearch}
             onChange={(e) => setUserName(e.target.value)}
+            // style={{}}
           />
           <button onClick={fetchTwitterInfo}>Bilgileri Çek</button>
         </div>
@@ -225,10 +227,13 @@ function App() {
             {(avatar && <img src={avatar} alt="avatar" />) || <AvatarLoader />}
             <div>
               <div className="name">
-                {name || "name"}
-                {isVerified && <VerifiedIcon width="19" height="19" />}
+                <span>{langText?.name || "Ad Soyad"}</span>
+                {}
+                {isVerified === 1 && <VerifiedIcon width="19" height="19" />}
               </div>
-              <div className="username">@{userName || "username"}</div>
+              <div className="username">
+                @{langText?.username || "username"}
+              </div>
             </div>
           </div>
           <div className="tweet-content">
@@ -240,13 +245,14 @@ function App() {
           </div>
           <div className="tweet-stats">
             <span>
-              <b>{formatNumber(retweets)}</b> Retweet
+              <b>{formatNumber(retweets)}</b> {langText?.retweet}
             </span>
             <span>
-              <b>{formatNumber(quoteTweets)}</b> Alıntı Tweetler
+              <b>{formatNumber(quoteTweets)}</b>
+              {langText?.quote}
             </span>
             <span>
-              <b>{formatNumber(likes)}</b> Beğeni
+              <b>{formatNumber(likes)}</b> {langText?.like}
             </span>
           </div>
           <div className="tweet-actions">

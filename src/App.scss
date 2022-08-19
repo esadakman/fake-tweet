@@ -131,7 +131,7 @@ body {
     transition: 0.3s all linear;
     font-size: 15px;
     option {
-      color: #111;
+      color: black;
     }
     &::placeholder {
       color: white;
@@ -139,6 +139,12 @@ body {
     }
     &:focus {
       border-color: #4e555a;
+    }
+  }
+
+  .search {
+    &::placeholder {
+      color: red;
     }
   }
 
