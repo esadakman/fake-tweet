@@ -8,10 +8,10 @@ import {
   VerifiedIcon,
 } from "./icons";
 
-// const tweetFormat = tweet => {
-//   tweet = tweet.replace(/@([\w]+), 'a' );
-//   return tweet;
-// }
+const tweetFormat = (tweet) => {
+  tweet = tweet.replace(/@([\w]+)/, "a");
+  return tweet;
+};
 
 function App() {
   const [name, setName] = useState();
@@ -33,7 +33,7 @@ function App() {
               className="input"
               type="text"
               placeholder="Name Surname"
-              value={name}
+              value={name || ""}
               onChange={(e) => setName(e.target.value)}
             />
           </li>
@@ -42,7 +42,7 @@ function App() {
               className="input"
               type="text"
               placeholder="Username"
-              value={userName}
+              value={userName || ""}
               onChange={(e) => setUserName(e.target.value)}
             />
           </li>
@@ -52,7 +52,7 @@ function App() {
               type="text"
               maxLength="290"
               placeholder="Tweet"
-              value={tweet}
+              value={tweet || ""}
               onChange={(e) => setTweet(e.target.value)}
             />
           </li>
@@ -74,7 +74,7 @@ function App() {
             </div>
           </div>
           <div className="tweet-content">
-            <p>{tweet || "example tweet here"}</p>
+            <p>{(tweet && tweetFormat(tweet)) || "example tweet here"}</p>
           </div>
           <div className="tweet-stats">
             <span>

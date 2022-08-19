@@ -59,8 +59,9 @@ body {
     }
   }
   .textarea {
-    width: 100%;
-    // max-width: 100%;
+    width: 95%;
+    height: 6rem;
+    resize: none;
     background: transparent;
     border-bottom: 1px solid #2f3336;
     color: white;
@@ -116,7 +117,7 @@ body {
       line-height: 28px;
       color: white;
       //   hyphens: auto;
-      //   width: 5rem;
+      width: 100%;
       overflow: hidden;
     }
   }
