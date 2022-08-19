@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, createRef } from "react";
+import { useScreenshot } from "use-react-screenshot";
 import "./App.scss";
 import {
   LikeIcon,
@@ -7,6 +8,7 @@ import {
   ShareIcon,
   VerifiedIcon,
 } from "./icons";
+import { AvatarLoader } from "./loader";
 
 const tweetFormat = (tweet) => {
   tweet = tweet
@@ -16,7 +18,19 @@ const tweetFormat = (tweet) => {
   return tweet;
 };
 
+const formatNumber = (number) => {
+  if (number < 1000) {
+    return number;
+  }
+  number /= 1000;
+  number = String(number).split(".");
+  return (
+    number[0] + (number[1] > 100 ? "," + number[1].slice(0, 1) + " B" : " B")
+  );
+};
+
 function App() {
+  const tweetRef = createRef(null);
   const [name, setName] = useState();
   const [userName, setUserName] = useState();
   const [isVerified, setIsVerified] = useState(false);
@@ -25,6 +39,16 @@ function App() {
   const [retweets, setRetweets] = useState(0);
   const [quoteTweets, setQuoteTweets] = useState(0);
   const [likes, setLikes] = useState(0);
+  const [image, takeScreenshot] = useScreenshot();
+
+  const avatarHandle = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.addEventListener("load", function () {
+      setAvatar(this.result);
+    });
+    reader.readAsDataURL(file);
+  };
 
   return (
     <>
@@ -32,42 +56,77 @@ function App() {
         <h3>Tweet Ayarları</h3>
         <ul>
           <li>
+            <label>Name Surname</label>
             <input
               className="input"
               type="text"
-              placeholder="Name Surname"
+              // placeholder="Name Surname"
               value={name || ""}
               onChange={(e) => setName(e.target.value)}
             />
           </li>
           <li>
+            <label>Username</label>
             <input
               className="input"
               type="text"
-              placeholder="Username"
+              // placeholder="Username"
               value={userName || ""}
               onChange={(e) => setUserName(e.target.value)}
             />
           </li>
           <li>
+            <label>Tweet</label>
             <textarea
               className="textarea"
               type="text"
               maxLength="290"
-              placeholder="Tweet"
+              // placeholder="Tweet"
               value={tweet || ""}
               onChange={(e) => setTweet(e.target.value)}
             />
           </li>
+          <li>
+            <label>Avatar</label>
+            <input className="input" type="file" onChange={avatarHandle} />
+          </li>
+          <li>
+            <label>Retweet</label>
+            <input
+              className="input"
+              type="number"
+              // placeholder="Retweet"
+              value={retweets || ""}
+              onChange={(e) => setRetweets(e.target.value)}
+            />
+          </li>
+          <li>
+            <label>Quote Tweets</label>
+            <input
+              className="input"
+              type="number"
+              // placeholder="Quote Tweets"
+              value={quoteTweets || ""}
+              onChange={(e) => setQuoteTweets(e.target.value)}
+            />
+          </li>
+          <li>
+            <label>Likes</label>
+            <input
+              className="input"
+              type="number"
+              // placeholder="Like"
+              value={likes || ""}
+              onChange={(e) => setLikes(e.target.value)}
+            />
+          </li>
+          <button>Oluştur</button>
         </ul>
       </div>
       <div className="tweet-container">
-        <div className="tweet">
+        <div className="tweet" ref={tweetRef}>
           <div className="tweet-author">
-            <img
-              src="https://pbs.twimg.com/profile_images/1558519296938188808/KEV4_vlm_bigger.jpg"
-              alt="pp"
-            />
+            {(avatar && <img src={avatar} alt="avatar" />) || <AvatarLoader />}
             <div>
               <div className="name">
                 {name || "name"}
@@ -85,13 +144,13 @@ function App() {
           </div>
           <div className="tweet-stats">
             <span>
-              <b>{retweets}</b> Retweet
+              <b>{formatNumber(retweets)}</b> Retweet
             </span>
             <span>
-              <b>{quoteTweets}</b> Alıntı Tweetler
+              <b>{formatNumber(quoteTweets)}</b> Alıntı Tweetler
             </span>
             <span>
-              <b>{likes}</b> Beğeni
+              <b>{formatNumber(likes)}</b> Beğeni
             </span>
           </div>
           <div className="tweet-actions">
