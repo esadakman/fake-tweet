@@ -9,7 +9,10 @@ import {
 } from "./icons";
 
 const tweetFormat = (tweet) => {
-  tweet = tweet.replace(/@([\w]+)/, "a");
+  tweet = tweet
+    .replace(/@([\w]+)/g, "<span>@$1</span>")
+    .replace(/#([\wşçöğüıİ]+)/gi, "<span>#$1</span>")
+    .replace(/(https?:\/\/[\w\.\/]+)/, "<span>$1</span>");
   return tweet;
 };
 
@@ -74,7 +77,11 @@ function App() {
             </div>
           </div>
           <div className="tweet-content">
-            <p>{(tweet && tweetFormat(tweet)) || "example tweet here"}</p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: (tweet && tweetFormat(tweet)) || "example tweet here",
+              }}
+            ></p>
           </div>
           <div className="tweet-stats">
             <span>
