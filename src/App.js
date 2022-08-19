@@ -8,6 +8,7 @@ import {
   ShareIcon,
   VerifiedIcon,
 } from "./icons";
+import { language } from "./language";
 import { AvatarLoader } from "./loader";
 
 function convertImgToBase64(url, callback, outputFormat) {
@@ -48,19 +49,23 @@ const formatNumber = (number) => {
 
 function App() {
   const tweetRef = createRef(null);
-  const downloadRef = createRef(null);
+  const downloadRef = createRef();
   const [name, setName] = useState();
   const [userName, setUserName] = useState();
-  const [isVerified, setIsVerified] = useState(false);
+  const [isVerified, setIsVerified] = useState(0);
   const [tweet, setTweet] = useState();
   const [avatar, setAvatar] = useState();
   const [retweets, setRetweets] = useState(0);
   const [quoteTweets, setQuoteTweets] = useState(0);
   const [likes, setLikes] = useState(0);
+  const [lang, setLang] = useState("tr");
   const [image, takeScreenshot] = useScreenshot();
   const [langText, setLangText] = useState();
-
   const getImage = () => takeScreenshot(tweetRef.current);
+
+  useEffect(() => {
+    setLangText(language[lang]);
+  }, [lang]);
 
   useEffect(() => {
     if (image) {
@@ -103,10 +108,10 @@ function App() {
   return (
     <>
       <div className="tweet-settings">
-        <h3>Tweet Ayarları</h3>
+        <h3>{langText?.settings}</h3>
         <ul>
           <li>
-            <label>Name Surname</label>
+            <label>{langText?.name}</label>
             <input
               className="input"
               type="text"
@@ -116,7 +121,7 @@ function App() {
             />
           </li>
           <li>
-            <label>Username</label>
+            <label>{langText?.username}</label>
             <input
               className="input"
               type="text"
@@ -170,6 +175,16 @@ function App() {
               onChange={(e) => setLikes(e.target.value)}
             />
           </li>
+          <li>
+            <label>Doğrulanmış Hesap</label>
+            <select
+              onChange={(e) => setIsVerified(e.target.value)}
+              defaultValue={isVerified}
+            >
+              <option value="1">Evet</option>
+              <option value="0">Hayır</option>
+            </select>
+          </li>
           <button onClick={getImage}>Oluştur</button>
           <div className="download-url">
             {image && (
@@ -181,6 +196,20 @@ function App() {
         </ul>
       </div>
       <div className="tweet-container">
+        <div className="app-language">
+          <span
+            onClick={() => setLang("tr")}
+            className={(lang === "tr" && "active") || ""}
+          >
+            Türkçe
+          </span>
+          <span
+            onClick={() => setLang("en")}
+            className={(lang === "en" && "active") || ""}
+          >
+            English
+          </span>
+        </div>
         <div className="fetch-info">
           <input
             type="text"

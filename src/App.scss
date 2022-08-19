@@ -24,29 +24,55 @@ body {
 
 .tweet-container {
   padding: 0 50px;
-  .fetch-info {
-    margin-bottom: 30px;
+  position: relative;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  .app-language {
+    margin-bottom: 15px;
+    color: rgba(#fff, 0.5);
+    font-size: 14px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    display: flex;
-    input {
-      flex: 1;
-      background: #2f3336;
-      height: 40px;
-      line-height: 40px;
-      border-radius: 3px 0 0 3px;
-      color: #fff;
-      padding: 0 15px;
-      font-size: 15px;
-    }
-    button {
-      height: 40px;
-      padding: 0 20px;
-      font-size: 15px;
-      background: #1da1f2;
-      color: #fff;
-      border-radius: 0 3px 3px 0;
+    padding: 10px 0;
+    span {
+      margin: 0 15px;
       cursor: pointer;
+      &.active {
+        color: #fff;
+      }
     }
+  }
+}
+.fetch-info {
+  margin-bottom: 30px;
+  width: 90%;
+  display: flex;
+  input {
+    flex: 1;
+    background: #2f3336;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 3px 0 0 3px;
+    color: #fff;
+    padding: 0 15px;
+    font-size: 15px;
+  }
+  button {
+    height: 40px;
+    padding: 0 20px;
+    font-size: 15px;
+    background: #1da1f2;
+    color: #fff;
+    border-radius: 0 3px 3px 0;
+    cursor: pointer;
   }
 }
 
@@ -96,6 +122,26 @@ body {
       border-color: #4e555a;
     }
   }
+  select {
+    width: 100%;
+    background: transparent;
+    border-bottom: 1px solid #2f3336;
+    color: white;
+    padding: 5px 0 15px;
+    transition: 0.3s all linear;
+    font-size: 15px;
+    option {
+      color: #111;
+    }
+    &::placeholder {
+      color: white;
+      font-size: 15px;
+    }
+    &:focus {
+      border-color: #4e555a;
+    }
+  }
+
   button {
     width: 100%;
     height: 40px;
