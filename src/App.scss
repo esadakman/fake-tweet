@@ -54,7 +54,7 @@ body {
 }
 .fetch-info {
   margin-bottom: 30px;
-  width: 90%;
+  width: 100%;
   display: flex;
   input {
     flex: 1;
@@ -84,9 +84,9 @@ body {
 }
 
 .tweet-settings {
-  max-width: 340px;
-  width: 340px;
-  min-width: 340px;
+  max-width: 440px;
+  width: 440px;
+  min-width: 440px;
   flex: 1;
   border-right: 1px solid #2f3336;
   height: 100%;

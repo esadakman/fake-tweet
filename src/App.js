@@ -90,7 +90,8 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         const twitter = data[0];
-        console.log(twitter.verified === true);
+        // console.log(twitter.verified === true);
+        // console.log(twitter);
 
         convertImgToBase64(
           twitter.profile_image_url_https,
@@ -213,64 +214,68 @@ function App() {
             English
           </span>
         </div>
-        <div className="fetch-info">
-          <input
-            className="search"
-            type="text"
-            value={userName || ""}
-            placeholder={langText?.userSearch}
-            onChange={(e) => setUserName(e.target.value)}
-            // style={{}}
-          />
-          <button onClick={fetchTwitterInfo}>{langText?.button}</button>
-        </div>
+        <div className="wrapper">
+          <div className="fetch-info">
+            <input
+              className="search"
+              type="text"
+              value={userName || ""}
+              placeholder={langText?.userSearch}
+              onChange={(e) => setUserName(e.target.value)}
+              // style={{}}
+            />
+            <button onClick={fetchTwitterInfo}>{langText?.button}</button>
+          </div>
 
-        <div className="tweet" ref={tweetRef}>
-          <div className="tweet-author">
-            {(avatar && <img src={avatar} alt="avatar" />) || <AvatarLoader />}
-            <div>
-              <div className="name">
-                <span>{name || langText?.name || "Ad Soyad"}</span>
+          <div className="tweet" ref={tweetRef}>
+            <div className="tweet-author">
+              {(avatar && <img src={avatar} alt="avatar" />) || (
+                <AvatarLoader />
+              )}
+              <div>
+                <div className="name">
+                  <span>{name || langText?.name || "Ad Soyad"}</span>
 
-                {isVerified == 1 && <VerifiedIcon width="19" height="19" />}
-              </div>
-              <div className="username">
-                @{userName || langText?.username || "username"}
+                  {isVerified == 1 && <VerifiedIcon width="19" height="19" />}
+                </div>
+                <div className="username">
+                  @{userName || langText?.username || "username"}
+                </div>
               </div>
             </div>
-          </div>
-          <div className="tweet-content">
-            <p
-              dangerouslySetInnerHTML={{
-                __html: (tweet && tweetFormat(tweet)) || "example tweet here",
-              }}
-            ></p>
-          </div>
-          <div className="tweet-stats">
-            <span>
-              <b>{formatNumber(retweets)}</b> {langText?.retweet}
-            </span>
-            <span>
-              <b>{formatNumber(quoteTweets)}</b>
-              {langText?.quote}
-            </span>
-            <span>
-              <b>{formatNumber(likes)}</b> {langText?.like}
-            </span>
-          </div>
-          <div className="tweet-actions">
-            <span>
-              <ReplyIcon />
-            </span>
-            <span>
-              <RetweetIcon />
-            </span>
-            <span>
-              <LikeIcon />
-            </span>
-            <span>
-              <ShareIcon />
-            </span>
+            <div className="tweet-content">
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: (tweet && tweetFormat(tweet)) || "example tweet here",
+                }}
+              ></p>
+            </div>
+            <div className="tweet-stats">
+              <span>
+                <b>{formatNumber(retweets)}</b> {langText?.retweet}
+              </span>
+              <span>
+                <b>{formatNumber(quoteTweets)}</b>
+                {langText?.quote}
+              </span>
+              <span>
+                <b>{formatNumber(likes)}</b> {langText?.like}
+              </span>
+            </div>
+            <div className="tweet-actions">
+              <span>
+                <ReplyIcon />
+              </span>
+              <span>
+                <RetweetIcon />
+              </span>
+              <span>
+                <LikeIcon />
+              </span>
+              <span>
+                <ShareIcon />
+              </span>
+            </div>
           </div>
         </div>
       </div>
