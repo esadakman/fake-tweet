@@ -106,6 +106,7 @@ function App() {
         setLikes(twitter.status.favorite_count);
 
         twitter.verified === true ? setIsVerified(1) : setIsVerified(0);
+        getImage();
       });
   };
   // console.log(name);
@@ -125,7 +126,7 @@ function App() {
             />
           </li>
           <li>
-            <label>{userName || langText?.username}</label>
+            <label>{langText?.username}</label>
             <input
               className="input"
               type="text"

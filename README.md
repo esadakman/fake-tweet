@@ -53,3 +53,5 @@ $ npm start / yarn start
 ```
 
 ### Preview of the Project
+
+![fake](https://user-images.githubusercontent.com/98649983/185615731-e5c7be97-8961-44fa-9a5c-0630c75e753a.gif)
