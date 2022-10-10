@@ -46,7 +46,7 @@ SOLUTION
 To run this project;
 
 ```
-$ git clone https://github.com/esadakman/fake-tweet-generator.git
+$ git clone https://github.com/esadakman/reactjs-tweet-generator.git
 $ cd ./fake-tweet-generator
 $ npm install / yarn
 $ npm start / yarn start
